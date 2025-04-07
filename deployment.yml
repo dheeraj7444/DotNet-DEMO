@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: dotnet-demoapp
+  name: dotnet-demoapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dotnet-demoapp
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: dotnet-demoapp
+    spec:
+      containers:
+      - image: dheeraj7444/dotnet-demoapp:5
+        name: dotnet-demoapp
+        resources: {}
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: dotnet-demoapp
+  name: dotnet-demoapp
+spec:
+  ports:
+  - port: 5000
+    protocol: TCP
+    targetPort: 5000
+  selector:
+    app: dotnet-demoapp
+  type: NodePort
+status:
+  loadBalancer: {}
